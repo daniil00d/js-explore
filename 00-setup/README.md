@@ -9,6 +9,16 @@
 Этот раздел — про то, как заставить его говорить, и про то, где брать AST и типы для
 статического трека.
 
+## Быстрый старт
+
+```bash
+node 00-setup/examples/check-env.mjs      # что за окружение и чего в нём не хватает
+node 00-setup/examples/flag-tour.mjs      # все основные флаги V8 за один запуск
+```
+
+Дальше — [`examples/README.md`](./examples/README.md) с порядком чтения и
+[`examples/flags-cheatsheet.md`](./examples/flags-cheatsheet.md) как справочник.
+
 ## Что изучаем
 
 - [ ] Node.js и `--allow-natives-syntax`: функции `%GetOptimizationStatus`, `%OptimizeFunctionOnNextCall`,
@@ -21,15 +31,19 @@
 - [ ] Turbolizer и `--trace-turbo`: визуализация фаз оптимизирующего компилятора
 - [ ] Chrome DevTools как инструмент анализа: Performance, Memory, Coverage
 - [ ] Статический трек: AST Explorer, `@babel/parser`, `typescript` как библиотека, `ts-morph`
+- [ ] Флаги сборки (`process.config.variables`): почему в конкретном Node может не быть Maglev
+- [ ] Release против debug: почему часть флагов из статей молча ничего не печатает
 - [ ] Фиксация окружения: почему версия движка обязана попадать в заметки
 
 ## Ключевые вопросы для самопроверки
 
-1. Почему `%OptimizeFunctionOnNextCall` без предварительных вызовов функции работает не так,
-   как ожидается?
+1. Почему `%OptimizeFunctionOnNextCall` без `%PrepareFunctionForOptimization` не делает
+   ничего, причём молча?
 2. Чем вывод `--trace-opt` отличается от `--trace-deopt` и какой из них показывает причину?
 3. Почему бенчмарк на `d8` и тот же код в Node могут вести себя по-разному?
-4. Что именно ломается, если запустить пример с `--allow-natives-syntax` в проде?
+4. Одна и та же маска 41 означает TurboFan на свежем V8 и Maglev на старом. Как так вышло и
+   что из этого следует для любых чужих примеров?
+5. Что именно ломается, если запустить пример с `--allow-natives-syntax` в проде?
 
 ## Ссылки
 
@@ -54,10 +68,18 @@
 - [V8 runtime functions (natives syntax)](https://github.com/v8/v8/blob/main/src/runtime/runtime.h) — список `%`-функций
 - [Mathias Bynens: JavaScript engine fundamentals](https://mathiasbynens.be/notes/shapes-ics) — с чего начать чтение
 
-## Что положим в `examples/`
+## Что лежит в [`examples/`](./examples)
 
 | Файл | Что показывает |
 | --- | --- |
-| `check-env.mjs` | Печатает версию Node/V8 и доступность natives syntax |
-| `optimization-status.mjs` | Читает статус оптимизации функции через `%GetOptimizationStatus` |
-| `flags-cheatsheet.md` | Шпаргалка команд под каждый раздел репозитория |
+| [`check-env.mjs`](./examples/check-env.mjs) | Версии, флаги сборки V8, доступность `d8` и `%`-функций |
+| [`flag-tour.mjs`](./examples/flag-tour.mjs) | Все основные диагностические флаги за один запуск |
+| [`subject.mjs`](./examples/subject.mjs) | Подопытная программа для тура по флагам |
+| [`optimization-status.mjs`](./examples/optimization-status.mjs) | Уровни компиляции через `%GetOptimizationStatus` |
+| [`natives-syntax.mjs`](./examples/natives-syntax.mjs) | Форма объектов, виды элементов, Smi и строки |
+| [`natives.mjs`](./examples/natives.mjs) | Обёртки над `%`-функциями с проверкой флага |
+| [`flags-cheatsheet.md`](./examples/flags-cheatsheet.md) | Шпаргалка команд под каждый раздел репозитория |
+| [`d8-setup.md`](./examples/d8-setup.md) | Установка `d8` и чем он отличается от Node |
+| [`static-toolchain.md`](./examples/static-toolchain.md) | Библиотеки для статического трека |
+
+Проверено на `node v22.14.0 / V8 12.4.254.21-node.22` и `d8` (V8 15.5.18), linux-x64.
