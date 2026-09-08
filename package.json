@@ -17,6 +17,7 @@
     "@babel/traverse": "^7.29.8",
     "acorn": "^8.18.0",
     "acorn-walk": "^8.3.5",
+    "eslint-scope": "^8.4.0",
     "typescript": "^5.9.3"
   }
 }
