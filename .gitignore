@@ -1,0 +1,10 @@
+node_modules/
+
+# Артефакты экспериментов с V8
+isolate-*.log
+v8.log
+turbo-*.json
+turbo-*.cfg
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
