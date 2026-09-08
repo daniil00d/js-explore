@@ -26,7 +26,7 @@ node 00-setup/examples/flag-tour.mjs      # все основные флаги V
 - [ ] `d8` — отладочная оболочка V8: чем отличается от Node и почему в ней удобнее эксперименты
 - [ ] Как получить `d8`: `jsvu` (готовые сборки) против сборки V8 из исходников через `depot_tools`
 - [ ] Флаги диагностики: `--print-bytecode`, `--print-opt-code`, `--trace-opt`, `--trace-deopt`,
-      `--trace-ic`, `--trace-gc`, `--trace-turbo`
+      `--log-ic`, `--trace-gc`, `--trace-turbo`
 - [ ] Список всех флагов: `node --v8-options`, `d8 --help`
 - [ ] Turbolizer и `--trace-turbo`: визуализация фаз оптимизирующего компилятора
 - [ ] Chrome DevTools как инструмент анализа: Performance, Memory, Coverage
