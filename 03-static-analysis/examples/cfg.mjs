@@ -60,11 +60,15 @@ export function buildCfg(functionNode, source) {
     return block;
   };
 
+  // Ребро — один объект в двух списках, а не две копии: анализам нужно уметь
+  // помечать конкретное ребро (например, «это ребро невыполнимо») и видеть
+  // пометку с обеих сторон.
   const connect = (from, to, label = '') => {
     if (!from || !to) return;
     if (from.successors.some((edge) => edge.to === to && edge.label === label)) return;
-    from.successors.push({ to, label });
-    to.predecessors.push({ from, label });
+    const edge = { from, to, label };
+    from.successors.push(edge);
+    to.predecessors.push(edge);
   };
 
   const entry = newBlock('вход');
