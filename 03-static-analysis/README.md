@@ -10,6 +10,19 @@ inlining в компиляторе, поиск уязвимостей — всё
 половина темы: почему точный ответ невозможен и как анализаторы выбирают, в какую сторону
 ошибаться.
 
+## Быстрый старт
+
+```bash
+npm install                                               # acorn, eslint-scope, Babel
+node 03-static-analysis/examples/scope-analysis.mjs       # кто на кого ссылается
+node 03-static-analysis/examples/build-cfg.mjs            # граф и недостижимый код
+```
+
+Дальше — [`examples/README.md`](./examples/README.md) с порядком чтения,
+[`examples/dataflow-primer.md`](./examples/dataflow-primer.md) как справочник по анализу
+потока данных и [`examples/limits-of-analysis.md`](./examples/limits-of-analysis.md) про
+то, где у всего этого граница.
+
 ## Что изучаем
 
 - [ ] Scope и binding: таблица символов, разрешение имён, свободные и связанные переменные
@@ -56,11 +69,30 @@ inlining в компиляторе, поиск уязвимостей — всё
 - [CodeQL](https://codeql.github.com/docs/) — анализ кода как запросов к базе
 - [Semgrep](https://semgrep.dev/docs/) — поиск по семантическим паттернам
 
-## Что положим в `examples/`
+## Что лежит в `examples/`
 
 | Файл | Что показывает |
 | --- | --- |
-| `scope-analysis.mjs` | Построение таблицы областей видимости по AST |
-| `build-cfg.mjs` | CFG для функции и поиск недостижимого кода |
-| `constant-folding.mjs` | Простейшая абстрактная интерпретация констант |
-| `analysis-killers.mjs` | Код, на котором любой анализатор обязан сдаться |
+| [`scope-analysis.mjs`](./examples/scope-analysis.mjs) | Дерево областей видимости, замыкания, затенение; сверка с `eslint-scope` |
+| [`scope.mjs`](./examples/scope.mjs) | Сам анализ областей видимости, отдельным модулем |
+| [`build-cfg.mjs`](./examples/build-cfg.mjs) | CFG функции, недостижимый код и сверка с покрытием V8 |
+| [`cfg.mjs`](./examples/cfg.mjs) | Построение графа, достижимость, доминаторы, фронты доминирования |
+| [`dataflow.mjs`](./examples/dataflow.mjs) | Достигающие определения и живость: итеративный алгоритм |
+| [`variables.mjs`](./examples/variables.mjs) | Какие переменные читает и пишет каждая инструкция графа |
+| [`ssa.mjs`](./examples/ssa.mjs) | SSA-форма: φ-функции, переименование, проверка инвариантов |
+| [`constant-folding.mjs`](./examples/constant-folding.mjs) | Решётка значений, свёртка, распространение констант, отсечение ветвей |
+| [`call-graph.mjs`](./examples/call-graph.mjs) | Статический граф вызовов против настоящего, снятого с выполнения |
+| [`analysis-killers.mjs`](./examples/analysis-killers.mjs) | Код, на котором любой анализатор обязан сдаться |
+| [`dataflow-primer.md`](./examples/dataflow-primer.md) | Схема любого анализа потока данных и словарь терминов |
+| [`limits-of-analysis.md`](./examples/limits-of-analysis.md) | Почему точный ответ невозможен и как инструменты выбирают сторону |
+
+## Лабы
+
+| Лаба | Задача |
+| --- | --- |
+| [01-safe-rename](./labs/01-safe-rename) | Переименовать переменную — или обоснованно отказаться |
+| [02-eliminate-dead-code](./labs/02-eliminate-dead-code) | Найти по графу код, до которого не доходит управление, и убрать его |
+| [03-constant-propagation](./labs/03-constant-propagation) | Выполнить функцию на описаниях значений вместо значений |
+
+Задания, проверки и разборы — в [`labs/`](./labs). Обзор всех лаб репозитория:
+`node tools/labs.mjs`.

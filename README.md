@@ -29,9 +29,9 @@
 | [13-wasm](./13-wasm) | WebAssembly как второй компилируемый вход в тот же движок | Liftoff, JS↔Wasm граница |
 | [14-benchmarking-and-profiling](./14-benchmarking-and-profiling) | Как честно мерить и не обмануться в микробенчмарках | DCE в бенчмарке, sampling profiler |
 
-Разделы `00-setup`, `01-spec-and-semantics` и `02-lexing-parsing-ast` уже наполнены
-работающими примерами и лабами; в остальных пока лежат доки и план примеров, который
-наполняется по мере прохождения тем.
+Разделы `00-setup`, `01-spec-and-semantics`, `02-lexing-parsing-ast` и
+`03-static-analysis` уже наполнены работающими примерами и лабами; в остальных пока лежат
+доки и план примеров, который наполняется по мере прохождения тем.
 
 ## Порядок изучения
 
@@ -68,11 +68,15 @@ node tools/labs.mjs --solution         # прогнать все лабы на �
 | [02-lexing-parsing-ast/01-finish-the-lexer](./02-lexing-parsing-ast/labs/01-finish-the-lexer) | Дописать лексер: числа, приватные имена, «регулярка или деление» |
 | [02-lexing-parsing-ast/02-write-a-lint-rule](./02-lexing-parsing-ast/labs/02-write-a-lint-rule) | Написать правило линтера `no-await-in-loop` на AST |
 | [02-lexing-parsing-ast/03-surgical-codemod](./02-lexing-parsing-ast/labs/03-surgical-codemod) | Переписать вызовы, не изменив в файле ни одного лишнего байта |
+| [03-static-analysis/01-safe-rename](./03-static-analysis/labs/01-safe-rename) | Переименовать переменную — или обоснованно отказаться |
+| [03-static-analysis/02-eliminate-dead-code](./03-static-analysis/labs/02-eliminate-dead-code) | Найти по графу код, до которого не доходит управление, и убрать его |
+| [03-static-analysis/03-constant-propagation](./03-static-analysis/labs/03-constant-propagation) | Выполнить функцию на описаниях значений вместо значений |
 
 Проверки устроены одинаково: правильных ответов в них нет. Правда каждый раз
 добывается на месте — из логов V8, из настоящего оператора `+`, из лексера acorn,
-из реально выполненного графа модулей. Поэтому лаба не рассыпается на другой версии
-движка и её нельзя пройти, угадав формат ответа.
+из реально выполненного графа модулей, из покрытия, которое собрал сам движок.
+Поэтому лаба не рассыпается на другой версии движка и её нельзя пройти, угадав
+формат ответа.
 
 ## Как устроена каждая папка
 
