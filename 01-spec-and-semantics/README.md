@@ -90,5 +90,16 @@ node 01-spec-and-semantics/examples/early-errors.mjs       # что отверг
 | [`spec-walkthrough.md`](./examples/spec-walkthrough.md) | Разбор абстрактных операций по шагам и как читать ECMA-262 |
 | [`harness.mjs`](./examples/harness.mjs) | Обвязка примеров: таблицы и запуск фрагментов через `node:vm` |
 
+## Лабы
+
+| Лаба | Задача |
+| --- | --- |
+| [01-predict-the-output](./labs/01-predict-the-output) | Предсказать результат четырнадцати фрагментов, не запуская их |
+| [02-implement-addition](./labs/02-implement-addition) | Реализовать оператор `+` по абстрактным операциям ECMA-262 |
+| [03-module-order](./labs/03-module-order) | Предсказать порядок инициализации в четырёх графах модулей |
+
+Задания, проверки и разборы — в [`labs/`](./labs). Обзор всех лаб репозитория:
+`node tools/labs.mjs`.
+
 Проверено на `node v22.14.0 / V8 12.4.254.21-node.22`, linux-x64. Флаги V8 здесь не нужны:
 раздел про правила языка, а не про внутренности движка.

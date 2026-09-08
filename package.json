@@ -7,6 +7,10 @@
   "engines": {
     "node": ">=20"
   },
+  "scripts": {
+    "labs": "node tools/labs.mjs",
+    "labs:solutions": "node tools/labs.mjs --solution"
+  },
   "devDependencies": {
     "@babel/generator": "^7.29.8",
     "@babel/parser": "^7.29.8",
