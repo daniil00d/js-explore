@@ -20,9 +20,7 @@ const brief = (value, limit = 30) => {
   return truncate(typeof value === 'string' ? value : inspect(value, { depth: 3, breakLength: Infinity }), limit);
 };
 
-export function usingSolution() {
-  return process.argv.includes('--solution');
-}
+const usingSolution = () => process.argv.includes('--solution');
 
 /** Модуль, который проверяем: заготовка читателя или эталон при --solution. */
 export function labTarget(checkerUrl, starter, solution = 'solution.mjs') {

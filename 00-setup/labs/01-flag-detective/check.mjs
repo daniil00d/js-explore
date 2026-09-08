@@ -18,9 +18,12 @@ const runWithFlags = (flags) =>
   execFileSync(process.execPath, [...flags, subject], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 
 // [marking 0x… <JSFunction sumStable (sfi = …)> for optimization to TURBOFAN, …]
+//
+// Уровень намеренно не фиксируется: в сборке с Maglev первым будет он, и это
+// не должно ломать проверку.
 const optimizationLog = runWithFlags(['--trace-opt']);
 const optimized = new Set(
-  [...optimizationLog.matchAll(/<JSFunction (\w+) \(sfi = [^)]+\)> for optimization to TURBOFAN/g)]
+  [...optimizationLog.matchAll(/<JSFunction (\w+) \(sfi = [^)]+\)> for optimization to \w+/g)]
     .map((match) => match[1])
     .filter((name) => FUNCTIONS.includes(name)),
 );
@@ -51,10 +54,10 @@ report(
   'Лаба 00-1: детектив по флагам',
   [
     equals(
-      'скомпилированы TurboFan',
+      'отправлены в оптимизатор',
       sorted([...optimized]),
-      sorted(answers.optimizedByTurbofan ?? []),
-      'Флаг --trace-opt, строки со словом marking: там видно, какие функции ушли в TurboFan.',
+      sorted(answers.sentToOptimizer ?? []),
+      'Флаг --trace-opt, строки со словом marking: там видно, какие функции движок счёл достойными оптимизации.',
     ),
     equals(
       'остались без оптимизации',

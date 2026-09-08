@@ -55,7 +55,7 @@ node --trace-opt 00-setup/labs/01-flag-detective/subject.mjs 2>&1 | grep sumMixe
 </details>
 
 <details>
-<summary>Подсказка 2: как выглядит «отправлена в TurboFan»</summary>
+<summary>Подсказка 2: как выглядит «отправлена в оптимизатор»</summary>
 
 Строка со словом `marking`:
 
@@ -64,6 +64,8 @@ node --trace-opt 00-setup/labs/01-flag-detective/subject.mjs 2>&1 | grep sumMixe
 ```
 
 Дальше по той же функции будут `compiling method` и `completed optimizing`.
+Уровень в конце строки зависит от сборки: там, где включён Maglev, сначала
+появится он. Для ответа важен сам факт, а не уровень.
 </details>
 
 <details>
