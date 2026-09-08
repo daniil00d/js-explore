@@ -82,4 +82,14 @@ node 00-setup/examples/flag-tour.mjs      # все основные флаги V
 | [`d8-setup.md`](./examples/d8-setup.md) | Установка `d8` и чем он отличается от Node |
 | [`static-toolchain.md`](./examples/static-toolchain.md) | Библиотеки для статического трека |
 
+## Лабы
+
+| Лаба | Задача |
+| --- | --- |
+| [01-flag-detective](./labs/01-flag-detective) | По логам V8 выяснить, что случилось с четырьмя функциями |
+| [02-pick-the-flags](./labs/02-pick-the-flags) | Подобрать флаги, которые меняют поведение движка нужным образом |
+
+Задания, проверки и разборы — в [`labs/`](./labs). Обзор всех лаб репозитория:
+`node tools/labs.mjs`.
+
 Проверено на `node v22.14.0 / V8 12.4.254.21-node.22` и `d8` (V8 15.5.18), linux-x64.

@@ -95,3 +95,14 @@ node 02-lexing-parsing-ast/examples/lazy-parsing.mjs     # что из этог�
 | [`lazy-parsing.mjs`](./examples/lazy-parsing.mjs) | Preparser V8 по логам движка и стоимость разбора в мс |
 | [`ast-formats.md`](./examples/ast-formats.md) | Справочник различий форматов дерева |
 | [`parsing-in-v8.md`](./examples/parsing-in-v8.md) | Preparser, ленивость, кеши компиляции |
+
+## Лабы
+
+| Лаба | Задача |
+| --- | --- |
+| [01-finish-the-lexer](./labs/01-finish-the-lexer) | Дописать лексер: числа, приватные имена, «регулярка или деление» |
+| [02-write-a-lint-rule](./labs/02-write-a-lint-rule) | Написать правило линтера `no-await-in-loop` на AST |
+| [03-surgical-codemod](./labs/03-surgical-codemod) | Переписать вызовы, не изменив в файле ни одного лишнего байта |
+
+Задания, проверки и разборы — в [`labs/`](./labs). Обзор всех лаб репозитория:
+`node tools/labs.mjs`.
